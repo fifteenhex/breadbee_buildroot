@@ -1,0 +1,7 @@
+config BR2_PACKAGE_BEEBOT_CONTROLLER
+        bool "BeeBot Controller"
+	select BR2_PACKAGE_PYTHON3
+	select BR2_PACKAGE_PYTHON_SBUS
+	select BR2_PACKAGE_PYTHON_TINYODRIVE
+        help
+          BeeBot Controller
