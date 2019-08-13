@@ -97,14 +97,14 @@ upload: buildroot
 clean: buildroot_clean buildroot_rescue_clean
 	rm -rf $(OUTPUTS)
 
-update_uboot:
+uboot_update:
 	$(call update_git_package,uboot,msc313)
 	$(call clean_pkg,$(BUILDROOT_PATH),uboot-msc313)
 
 uboot_clean:
 	$(call clean_pkg,$(BUILDROOT_PATH),uboot-msc313)
 
-update_linux: linux_clean linux_rescue_clean
+linux_update: linux_clean linux_rescue_clean
 	$(call update_git_package,linux,msc313e)
 	$(call clean_pkg,$(BUILDROOT_PATH),linux-msc313e)
 	$(call clean_pkg,$(BUILDROOT_RESCUE_PATH),linux-msc313e)
@@ -124,3 +124,11 @@ run_tftpd:
 buildindocker:
 	docker build -t breadbee_buildroot .
 	docker run -v $(shell pwd):/breadbee_buildroot -t breadbee_buildroot sh -c "cd /breadbee_buildroot && make"
+
+update_bbc:
+	$(call update_git_package,beebot_controller,dev)
+	$(call clean_pkg,$(BUILDROOT_PATH),beebot_controller)
+	$(call update_git_package,python-tinyodrive,dev)
+	$(call clean_pkg,$(BUILDROOT_PATH),python-tinyodrive)
+	$(call update_git_package,python-sbus,dev)
+	$(call clean_pkg,$(BUILDROOT_PATH),python-sbus)
